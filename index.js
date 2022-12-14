@@ -9,13 +9,25 @@ const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
 
 if (leadsFromLocalStorage) {
     myLeads = leadsFromLocalStorage;
-    renderLeads();
+    render(myLeads);
+}
+
+function render(leads) {
+    let listItems = '';
+    for (let i=0; i<leads.length; i++) {
+       listItems += `<li>
+            <a target='_blank' href='${leads[i]}'>
+                    ${leads[i]}
+                </a>
+            </li>`
+    }
+    ulEl.innerHTML = listItems;
 }
 
 deleteBtn.addEventListener('dblclick', function() {
     localStorage.clear();
     myLeads = [];
-    renderLeads();
+    render(myLeads);
 })
 
 inputBtn.addEventListener("click", function() {
@@ -24,7 +36,7 @@ inputBtn.addEventListener("click", function() {
 
     localStorage.setItem("myLeads", JSON.stringify(myLeads));
 
-    renderLeads();
+    render(myLeads);
 });
 
 // Lets user hit enter and have same functionality as clicking
@@ -34,17 +46,3 @@ inputEl.addEventListener("keyup", function(event) {
         inputBtn.click();
     }
 })
-
-function renderLeads() {
-    let listItems = '';
-    for (let i=0; i<myLeads.length; i++) {
-        // ulEl.innerHTML += "<li>" + myLeads[i] + "</li>";
-        // listItems += "<li><a href='" + myLeads[i] + "' target='_blank'>" + myLeads[i] + "</li>";
-        listItems += `<li>
-            <a target='_blank' href='${myLeads[i]}'>
-                    ${myLeads[i]}
-                </a>
-            </li>`
-    }
-    ulEl.innerHTML = listItems;
-}
