@@ -4,6 +4,8 @@ const inputEl = document.getElementById('input-el');
 const inputBtn = document.getElementById('input-btn');
 const ulEl = document.getElementById('ul-el');
 
+let leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
+
 inputBtn.addEventListener("click", function() {
     myLeads.push(inputEl.value);
     inputEl.value = '';
@@ -11,7 +13,6 @@ inputBtn.addEventListener("click", function() {
     localStorage.setItem("myLeads", JSON.stringify(myLeads));
 
     renderLeads();
-    // console.log(localStorage.getItem("myLeads"));
 });
 
 // Lets user hit enter and have same functionality as clicking
